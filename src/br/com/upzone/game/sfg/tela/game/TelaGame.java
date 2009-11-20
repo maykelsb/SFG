@@ -5,6 +5,7 @@
 package br.com.upzone.game.sfg.tela.game;
 
 import br.com.upzone.game.sfg.personagem.PersonagemJogador;
+
 import br.com.upzone.gjme.personagem.Personagem;
 import br.com.upzone.gjme.tela.Tela;
 
