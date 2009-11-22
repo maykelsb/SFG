@@ -6,7 +6,9 @@ package br.com.upzone.game.sfg.tela.game;
 
 import br.com.upzone.game.sfg.personagem.PersonagemJogador;
 
+import br.com.upzone.gjme.personagem.IPersonagemControlavel;
 import br.com.upzone.gjme.personagem.Personagem;
+
 import br.com.upzone.gjme.tela.Tela;
 
 import java.io.IOException;
@@ -22,6 +24,7 @@ public class TelaGame extends Tela {
   public TelaGame() {
     try {
       this.personagemjogador = new PersonagemJogador();
+      this.personagemjogador.setTamanhoTela(this.getWidth(), this.getHeight());
       this.layermanager.append(this.personagemjogador);
     } catch (IOException ioex) {
       System.out.println(ioex.getMessage());
@@ -29,6 +32,8 @@ public class TelaGame extends Tela {
   }
 
   public void processarInput() {
+    int iKeyState = this.getKeyStates();
+    ((IPersonagemControlavel)this.personagemjogador).processarInput(iKeyState);
     this.personagemjogador.nextFrame();
   }
 }
