@@ -23,8 +23,7 @@ public class TelaGame extends Tela {
 
   public TelaGame() {
     try {
-      this.personagemjogador = new PersonagemJogador();
-      this.personagemjogador.setTamanhoTela(this.getWidth(), this.getHeight());
+      this.personagemjogador = new PersonagemJogador(this.getWidth(), this.getHeight());
       this.layermanager.append(this.personagemjogador);
     } catch (IOException ioex) {
       System.out.println(ioex.getMessage());

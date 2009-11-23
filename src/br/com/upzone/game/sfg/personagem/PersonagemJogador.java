@@ -4,6 +4,7 @@
  */
 package br.com.upzone.game.sfg.personagem;
 
+import br.com.upzone.gjme.Direcoes;
 import br.com.upzone.gjme.personagem.Personagem;
 import br.com.upzone.gjme.personagem.IPersonagemControlavel;
 import br.com.upzone.gjme.personagem.estado.Estado;
@@ -27,8 +28,10 @@ public class PersonagemJogador extends Personagem implements IPersonagemControla
   public final static int EST_PERSON_LEVANTANDO = 6;
   public final static int EST_PERSON_SOCO_FRACO = 7;
 
-  public PersonagemJogador() throws IOException {
-    super(Image.createImage("/SpriteSheets/guile.png"), 51, 50, 10, 100);
+  public PersonagemJogador(int iTelaLargura, int iTelaAltura) throws IOException {
+    super(Image.createImage("/SpriteSheets/guile.png"), 51, 50, 10, 100,
+            iTelaLargura, iTelaAltura, 10);
+    this.bRefletirSprite = true;
 
     // -- Adição do estado PARADO
     this.addEstado(PersonagemJogador.EST_PERSON_PARADO,
@@ -39,13 +42,7 @@ public class PersonagemJogador extends Personagem implements IPersonagemControla
     this.addEstado(PersonagemJogador.EST_PERSON_ANDANDO,
       new Estado(this, PersonagemJogador.EST_PERSON_ANDANDO, 7, 11) {
         public void executeNoEstado() {
-          System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-          System.out.println(this.personagem.getX());
-          System.out.println(((PersonagemJogador)this.personagem).getLarguraTela());
-
-          if (((PersonagemJogador)this.personagem).getLarguraTela() - (this.personagem.getRefPixelX()) > 5) {
-            this.personagem.setPosition(this.personagem.getX() + 5, this.personagem.getY());
-          }
+          this.personagem.deslocarNaHorizontal();
         }});
 
     // -- Adição do estado VIRANDO
@@ -70,14 +67,7 @@ public class PersonagemJogador extends Personagem implements IPersonagemControla
     this.addEstado(PersonagemJogador.EST_PERSON_PULANDO,
       new Estado(this, PersonagemJogador.EST_PERSON_PULANDO, new int[] {12, 21, 21, 22, 22, 22, 22, 21, 21, 12}) {
         public void executeNoEstado() {
-          switch (this.personagem.getFrame()) {
-            case 1: case 2: case 3: case 4:
-              this.personagem.setPosition(this.personagem.getX(), (this.personagem.getY() - 10));
-              break;
-            case 5: case 6: case 7: case 8:
-              this.personagem.setPosition(this.personagem.getX(), (this.personagem.getY() + 10));
-              break;
-          }
+          this.personagem.deslocarNaVertical();
         }
     }.defineContinuidade(Estado.TIP_EST_NAO_CONTINUO)
      .setPosEstado(PersonagemJogador.EST_PERSON_PARADO));
@@ -85,7 +75,9 @@ public class PersonagemJogador extends Personagem implements IPersonagemControla
     // -- Adição do estado CORRENDO
     this.addEstado(PersonagemJogador.EST_PERSON_CORRENDO,
       new Estado(this, PersonagemJogador.EST_PERSON_CORRENDO, new int[] {14, 15, 16, 17}) {
-        public void executeNoEstado() { }
+        public void executeNoEstado() {
+          this.personagem.deslocarNaHorizontal(5);
+        }
     });
 
     // -- Adição do estado SOCO_FRACO
@@ -107,12 +99,14 @@ public class PersonagemJogador extends Personagem implements IPersonagemControla
     } else {
       if ((iKeyState & GameCanvas.LEFT_PRESSED) != 0) {
         this.setEstado(PersonagemJogador.EST_PERSON_ANDANDO);
+        this.setDirecaoPersonagem(Direcoes.ESQUERDA);
       } else if ((iKeyState & GameCanvas.DOWN_PRESSED) != 0) {
         this.setEstado(PersonagemJogador.EST_PERSON_ABAIXANDO);
       } else if ((iKeyState & GameCanvas.UP_PRESSED) != 0) {
         this.setEstado(PersonagemJogador.EST_PERSON_PULANDO);
       } else if ((iKeyState & GameCanvas.RIGHT_PRESSED) != 0) {
         this.setEstado(PersonagemJogador.EST_PERSON_CORRENDO);
+        this.setDirecaoPersonagem(Direcoes.DIREITA);
       } else if ((iKeyState & GameCanvas.FIRE_PRESSED) != 0) {
         this.setEstado(PersonagemJogador.EST_PERSON_SOCO_FRACO);
       } else {
@@ -122,12 +116,14 @@ public class PersonagemJogador extends Personagem implements IPersonagemControla
     this.estadoAtual.executeNoEstado();
   }
 
-  public void setTamanhoTela(int iLargura, int iAltura) {
-    this.iTelaLargura = iLargura;
-    this.iTelaAltura = iAltura;
-  }
-
-  public int getLarguraTela() {
-    return this.iTelaLargura;
+  public void deslocarNaVertical() {
+    switch (this.getFrame()) {
+      case 1: case 2: case 3: case 4:
+        this.setPosition(this.getX(), (this.getY() - 10));
+        break;
+      case 5: case 6: case 7: case 8:
+        this.setPosition(this.getX(), (this.getY() + 10));
+        break;
+      }
   }
 }
