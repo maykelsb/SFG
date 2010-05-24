@@ -6,7 +6,7 @@ package br.com.upzone.game.sfg.midlet;
 
 import br.com.upzone.gjme.tela.GjME_Tela;
 
-import br.com.upzone.game.sfg.tela.game.GjME_TelaGame;
+import br.com.upzone.game.sfg.tela.game.SFG_Fase01;
 
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.MIDlet;
@@ -23,7 +23,7 @@ public class SFG_Midlet extends MIDlet {
   public void startApp() {
     try {
       this.display = Display.getDisplay(this);
-      this.tela = new GjME_TelaGame();
+      this.tela = new SFG_Fase01();
       this.tela.start();
       this.display.setCurrent(this.tela);
     } catch (Exception ex) {
