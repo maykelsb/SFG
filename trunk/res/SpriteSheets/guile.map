@@ -1,9 +1,9 @@
-Personagem
+﻿Personagem
  - Nome: Guile
  - Série: Street Fighter
- - RIP de: SNK vs. Capcom: Match of the Millennium
+ - RIP de: SNK vs. Capcom: Match of the Millennium - NeoGeo Pocket Color
  - RIP por: http://sdb.drshnaps.com/sheets/SNK/SNKvsCapcom/Guile.gif
- - Cores: Maykel "Gardner" dos Santos Braz <maykelsb@yahoo.com.br>
+ - Cores: Jean Marçal de Oliveira <jean_ikari@hotmail.com>
 
 Frames
  - Largura: 51 px
@@ -15,7 +15,7 @@ Mapeamento de Animações
 +==========+======================+========+=============+============+======================================+
 |PARADO    |0 a 5                 |SIM     |SIM          |SIM         |                                      |
 +----------+----------------------+--------+-------------+------------+--------------------------------------+
-|ANDANDO   |7 a 11                |SIM     |SIM          |IMCOMPLETO* |                                      |
+|ANDANDO   |7 a 11                |SIM     |SIM          |SIM         |                                      |
 +----------+----------------------+--------+-------------+------------+--------------------------------------+
 |ABAIXANDO |12 a 13               |NÃO     |SIM          |SIM         |                                      |
 +----------+----------------------+--------+-------------+------------+--------------------------------------+
@@ -25,10 +25,9 @@ Mapeamento de Animações
 +----------+----------------------+--------+-------------+------------+--------------------------------------+
 |PROVOCANDO|18 a 20               |NÃO     |SIM          |NÃO         |                                      |
 +----------+----------------------+--------+-------------+------------+--------------------------------------+
-|VIRANDO   |6                     |NÃO     |SIM          |NÃO         |Pré estado de ANDANDO/CORRENDO        |
+|VIRANDO   |6                     |NÃO     |NÃO          |NÃO         |Pré estado de ANDANDO/CORRENDO        |
 +----------+----------------------+--------+-------------+------------+--------------------------------------+
 |LEVANTANDO|12                    |NÃO     |NÃO          |NÃO         |Pós estado ABAIXANDO                  |
 +----------+----------------------+--------+-------------+------------+--------------------------------------+
-|SOCO FRACO|23 a 24               |NÃO     |NÃO          |NÃO         |Pós estado ABAIXANDO                  |
+|SOCO FRACO|2, 23, 24, 23         |NÃO     |NÃO          |SIM         |                                      |
 +----------+----------------------+--------+-------------+------------+--------------------------------------+
-* Personagem não é deslocado;
