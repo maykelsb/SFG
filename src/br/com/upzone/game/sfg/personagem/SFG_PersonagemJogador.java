@@ -29,9 +29,9 @@ public class SFG_PersonagemJogador extends GjME_Personagem
   public final static int EST_PERSON_LEVANTANDO = 6;
   public final static int EST_PERSON_SOCO_FRACO = 7;
 
-  public SFG_PersonagemJogador(int iTelaLargura, int iTelaAltura) throws IOException {
+  public SFG_PersonagemJogador() throws IOException {
     super(Image.createImage("/SpriteSheets/guile.png"), 51, 50, 10, 100,
-            iTelaLargura, iTelaAltura, 10);
+            170, 220, 10);
     this.bRefletirSprite = true;
 
     // -- Adição do estado PARADO
