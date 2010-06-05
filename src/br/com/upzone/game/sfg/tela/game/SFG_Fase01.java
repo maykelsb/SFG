@@ -5,13 +5,14 @@
 
 package br.com.upzone.game.sfg.tela.game;
 
-import br.com.upzone.game.sfg.personagem.SFG_PersonagemJogador;
+import br.com.upzone.game.sfg.personagem.SFG_Guile;
 import br.com.upzone.gjme.personagem.GjME_Personagem;
 import br.com.upzone.gjme.layer.GjME_TiledLayer;
 import br.com.upzone.gjme.tela.GjME_Tela;
 
 import java.io.IOException;
 import javax.microedition.lcdui.Image;
+import javax.microedition.lcdui.game.LayerManager;
 import javax.microedition.lcdui.game.TiledLayer;
 
 /**
@@ -37,7 +38,7 @@ public class SFG_Fase01 extends GjME_Tela {
                               {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
                               {1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0}};
 
-  private SFG_PersonagemJogador prgm;
+  private SFG_Guile prgm;
 
   protected TiledLayer tlayer = null;
 
@@ -53,13 +54,17 @@ public class SFG_Fase01 extends GjME_Tela {
     }
     // -- Carregando o persoangem
     try {
-      this.prgm = new SFG_PersonagemJogador();
+      this.prgm = new SFG_Guile();
       this.lm.append(this.prgm);
-    } catch (IOException ioex) {
+    } catch (Exception ioex) {
       System.out.println("Não foi possível criar o personagem solicitado. Motivo: " + ioex.getMessage());
     }
   }
 
+  /**
+   * Processando os comandos da tela atual.
+   */
   public void processarInput() {
+    this.prgm.processarInput(this.getKeyStates(), this.lm);
   }
 }
